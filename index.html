@@ -20,6 +20,13 @@ This workshop will be a traditional format, a combination of live lectures and e
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<!-- CodeMirror links -->
+		<script src="lib/codemirror.js"></script>
+		<link rel="stylesheet" href="js/lib/css/codemirror.css">
+		<script src="lib/js/javascript/javascript.js"></script>
+		<script src="js/addon/runmode/runmode.js"></script>
+		<!--  <script src="../mode/xml/xml.js"></script> -->
+		<!-- /CodeMirror links -->
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -42,19 +49,7 @@ This workshop will be a traditional format, a combination of live lectures and e
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 
-				<!-- <section>
-					<h3>Welcome!</h3>
-					<div class = "left-align">
-						<p>Girl Develop It is here to provide affordable and accessible programs to learn software through mentorship and hands-on instruction.</p>
-						<p class ="green">Some "rules"</p>
-						<ul>
-							<li>We are here for you!</li>
-							<li>Every question is important.</li>
-							<li>Help each other.</li>
-							<li>Have fun.</li>
-						</ul>
-					</div>
-				</section> -->
+
 				<!-- Welcome -->
 				<section>
 					<h3>Welcome to JS102</h3>
@@ -65,10 +60,91 @@ This workshop will be a traditional format, a combination of live lectures and e
 					</ul>
 				</section>
 				<!-- /Welcome -->
+				
+				<!-- Arrays -->
+				<section>
+					<h3>Arrays</h3>
+					<pre><code data-trim>
+						var coolArray = ["Pamela", "Bianca", "Brenda", "Aysegul"];
+					</code></pre>
+					<aside class="notes">
+						q: How long is it? 
+						What is the index of this one? 
+						What is at the 0th index? 
+						When would you use an array? 
+						How do we find out the length?
+					</aside>
+				</section>
+				<section>
+					<h3>Access and Assignment</h3>
+					<!-- <pre><code data-trim>
+var box = [];
+						
+box[0] = 'woof';						
+box[1] = 'meow';
+					</code></pre> -->
+					<textarea id="code" class="code" name="code" mode="javascript" runnable="true">
+var box = [];
+box[0] = 'woof';						
+box[1] = 'meow';
+box.push['moo'];
+box.pop();
+
+					</textarea>
+					<button>Run</button>
+
+				</section>
+				<!-- TODO runnable -->
+				<section>
+					<pre><code data-trim>
+
+var i = 0;
+box[i]; // ??
+box[1];
+box.pop(); //??
+box.length;
+					</code></pre>
+				</section>
+				<section>
+					<h3>Iteration</h3>
+					<textarea id="code" class="code" name="code" mode="javascript" runnable="true" cols="30" rows="10">
+var box = ['meow', 'Whoohooo!'];
+for(var i = 0; i < box.length; i++){
+						
+	console.log(i); //??
+						
+}
+					</textarea>
+					<button>Run</button>
+
+				</section>
+				<section>
+					<h3>Exercise Time</h3>
+					<p>Use a for loop to output: "quack! sneeze! boom!"</p>
+					<textarea id="code" class="code" name="code" mode="javascript" runnable="true" cols="30" rows="10">
+						var noisesArray = ["quack", "sneeze", "boom"];
+
+					</textarea>
+					<button>Run</button>
+
+				</section>
+				<!-- /Arrays -->
+
+				<!-- Objects -->
 				<section>
 					
 				</section>
+
+				<section>
+					<textarea id="code" class="code" name="code" mode="javascript" runnable="true">
+						console.log("hello")
+					</textarea>
+					<button>Run</button>
+					
+				</section>
 				
+
+					
 
 			</div>
 
@@ -76,6 +152,28 @@ This workshop will be a traditional format, a combination of live lectures and e
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
+
+		<!-- CodeMirror Init -->
+		<script>
+            window.onload = function() {
+                window.editor = CodeMirror.fromTextArea(code, {
+                    mode: "javascript",
+                    lineNumbers: true,
+                    lineWrapping: true,
+                    extraKeys: {
+                        //key binding for toggle full screen on/off
+                        "F11": function(cm) {
+                            cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+                        },
+                        //key binding for switch full screen off
+                        "Esc": function(cm) {
+                            if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+                        }
+                    }
+                });
+            };
+        </script>
+        <!-- /CodeMirror -->
 
 		<script>
 
