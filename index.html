@@ -132,16 +132,88 @@ for(var i = 0; i < box.length; i++){
 
 				<!-- Objects -->
 				<section>
-					
+					<h3>Objects</h3>
+					<p>{}</p>
 				</section>
-
 				<section>
+					<h3>Assignment</h3>
+					<pre><code data-trim>
+
+var box = {};
+box.material = "cardboard";
+//OR
+var box = {"material" : "cardboard"};
+					</code></pre>
+					<aside class="notes">
+						q:How many keys are in the object? 
+						What is the key name? 
+						What is the value?
+					</aside>
+
+				</section>
+				<section>
+					<h3>Access w/dots</h3>
+					<textarea id="code" class="code" name="code" mode="javascript" runnable="true">
+
+var box = {};
+    					
+box.material = "cardboard";
+						
+var cb = box.material;
+
+cb; //??
+
+box.material = "titanium";
+
+cb; //??
+					</textarea>
+					<button>Run</button>
+					<aside class="notes">
+						q: What is the new value after changing it?
+					</aside>
+				</section>
+				<section>
+					<h3>Brackets</h3>
+					<pre><code data-trim>
+box["material type"] = "cardboard";
+box["1234"] = 1234;
+					</code></pre>
+				</section>
+				<section>
+					<h3>Variables</h3>
+					<textarea id="code" class="code" name="code" mode="javascript" runnable="true">
+var box = {};
+						
+box["material"] = "cardboard";
+						
+						
+var key = "material";
+						
+box[key]; //??
+					</textarea>
+					<button>Run</button>
+				</section>
+				<section>
+					<h3>Values</h3>
+					<pre><code data-trim>
+var angelTheCat = { 
+	age: 18, 
+	furColor: "grey", 
+	isAngelic: true, 
+	likes: ["catnip", "milk"], 
+	birthday: {"month": 7, "day": 17, year: 1994} 
+}; 
+					</code></pre>
+				</section>
+				<!-- /Objects -->
+
+				<!-- <section>
 					<textarea id="code" class="code" name="code" mode="javascript" runnable="true">
 						console.log("hello")
 					</textarea>
 					<button>Run</button>
 					
-				</section>
+				</section> -->
 				
 
 					
