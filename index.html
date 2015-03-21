@@ -215,7 +215,7 @@ var angelTheCat = {
 					</code></pre>
 				</section>
 				<section>
-					<h3><<a href="http://jsfiddle.net/yonet3d/hpmwg1xy/" target="_blank">Exercise Time</a></h3>
+					<h3><a href="http://jsfiddle.net/yonet3d/hpmwg1xy/" target="_blank">Exercise Time</a></h3>
 				</section>
 				<!-- /Objects -->
 
@@ -289,6 +289,54 @@ for(var key in zoo) {
 				</section>
 				<!-- /Nested Objects -->
 
+				<!-- Functions -->
+				<section>
+					<h3>Functions</h3>
+					<pre><code data-trim>
+var add = function(a, b) {
+	return a + b;
+};
+add(5,4);
+					</pre></code>
+					<aside class="notes">
+						Declaration/definition
+						Parameters
+						Function name/body
+						Invocation/Calltime
+						Parameters
+					</aside>
+
+				</section>
+				<section>
+					<h3>Definition</h3>
+					<pre><code data-trim>
+var nameImprover = function (name, adj) {
+  return 'Col ' + name + ' Mc' + adj + ' pants';
+};	
+					</pre></code>
+				</section>
+				<section>
+					<h3>Definition vs. Call-time</h3>
+					<pre><code data-trim>
+var nameImprover = function (name, adj) {
+  return 'Col ' + name + ' Mc' + adj + ' pants';
+};	
+
+nameImprver("Pamela", "fancy");
+					</pre></code>
+				</section>
+				<section>
+					<h3>Naming Arguments</h3>
+					<pre><code data-trim>
+var nameImprover = function (name, adj) {
+  return 'Col ' + name + ' Mc' + adj + ' pants';
+};	
+
+nameImprover("Pamela", "shiny");
+nameImprover("Aysegul", "fancy");
+					</pre></code>
+				</section>
+				<!-- /Functions -->
 
 				<!-- <section>
 					<textarea id="code" class="code" name="code" mode="javascript" runnable="true">
