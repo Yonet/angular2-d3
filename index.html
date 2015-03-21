@@ -194,6 +194,15 @@ box[key]; //??
 					<button>Run</button>
 				</section>
 				<section>
+					<h3>Object Literals</h3>
+					<pre><code data-trim>
+var angelTheCat = { 
+	age: 18, 
+	furColor: "grey"
+}; 
+					</code></pre>
+				</section>
+				<section>
 					<h3>Values</h3>
 					<pre><code data-trim>
 var angelTheCat = { 
@@ -205,7 +214,81 @@ var angelTheCat = {
 }; 
 					</code></pre>
 				</section>
+				<section>
+					<h3><<a href="http://jsfiddle.net/yonet3d/hpmwg1xy/" target="_blank">Exercise Time</a></h3>
+				</section>
 				<!-- /Objects -->
+
+				<!-- Arrays of Objects -->
+				<section>
+					<h3>Arrays of Objects</h3>
+					<pre><code data-trim>
+var theAngelCats = [
+		{ name: "Angel", age: 18, furColor: "grey" },
+		{ name: "Evil", age: 14, furColor: "red" },
+		{ name: "Meh", age: 12, "Fur Color": "white" }
+	]
+
+					</code></pre>
+				</section>
+				<section>
+				<pre><code data-trim>
+theAngelCats[0].name = ;//?
+theAngelCats[2]["Fur Color"] = ;//?
+					</code></pre>
+				</section>
+				<section>
+					<h3><a href="https://jsfiddle.net/yonet3d/j0aebpc7/1/" target="_blank">Exercise Time</a></h3>
+					<a href="http://en.wikipedia.org/wiki/List_of_animal_sounds" target="_blank">Useful Link</a>
+				</section>
+				<!-- /Arrays of Objects -->
+
+				<!-- Nested Objects -->
+				<section>
+					<h3>Nested Objects</h3>
+					<img src="images/nested.jpeg" alt="nested">
+					<pre><code data-trim>
+var box = { "innerBox" : {} };
+					</code></pre>
+				</section>
+				<section>
+					<pre><code data-trim>
+var doll = {
+	size: "large",
+	innerDoll : { size: medium}
+};
+box.innerDoll.innerInnerDoll = {size: small};
+console.log(doll);
+					</code></pre>
+				</section>
+				<section>
+					<pre><code data-trim>
+var zoo = {
+	fox : {"3 fav foods": ["apple", "broccoli", "brussel sprouts"]}
+}
+zoo.fox["3 fav foods"];
+					</pre></code>
+				</section>
+				<section>
+					<h3>Iterating Objects</h3>
+					<pre><code data-trim>
+var zoo = {
+	birds : 3,
+	bears: 5,
+	cats: 12,
+}
+for(var key in zoo) {
+	console.log(zoo[key], key);
+}
+					</pre></code>
+					<button>Run</button>
+
+				</section>
+				<section>
+					<h3><a href="https://jsfiddle.net/yonet3d/zmr6gqze/" target="_blank">Exercise Time</a></h3>
+				</section>
+				<!-- /Nested Objects -->
+
 
 				<!-- <section>
 					<textarea id="code" class="code" name="code" mode="javascript" runnable="true">
