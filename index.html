@@ -4,11 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>JS102: Objects, Arrays and Functions ~ Girl Develop It</title>
+		<title>Ng-Vegas Angular2- d3.js presentation</title>
 
-		<meta name="description" content="Solidify your understanding of Objects, Arrays and Functions in JavaScript and learn the common mistakes made by beginners. This is a highly interactive course that uses exercises and projects to drive home these JS Fundamentals. You will finish with a strong foundation on one of the most important aspects of the language: objects, arrays and functions. 
-This workshop will be a traditional format, a combination of live lectures and exercise time, with TAs to help you through the exercises.">
-		<meta name="author" content="Aysegul Yonet, Bianca Gandolfo, Pamela Fox">
+		<meta name="description" content="">
+		<meta name="author" content="Aysegul Yonet,Patrick Stapleton">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -52,21 +51,13 @@ This workshop will be a traditional format, a combination of live lectures and e
 
 				<!-- Welcome -->
 				<section>
-					<h3>Welcome to JS102</h3>
-					<ul>
-						<li>{Objects}</li>
-						<li>[Arrays]</li>
-						<li>And Function(s){...}</li>
-					</ul>
+					
 				</section>
 				<!-- /Welcome -->
 				
 				<!-- Arrays -->
 				<section>
-					<h3>Arrays</h3>
-					<pre><code data-trim>
-						var coolArray = ["Pamela", "Bianca", "Brenda", "Aysegul"];
-					</code></pre>
+					
 					<aside class="notes">
 						q: How long is it? 
 						What is the index of this one? 
@@ -76,275 +67,108 @@ This workshop will be a traditional format, a combination of live lectures and e
 					</aside>
 				</section>
 				<section>
-					<h3>Access and Assignment</h3>
-					<!-- <pre><code data-trim>
-var box = [];
-						
-box[0] = 'woof';						
-box[1] = 'meow';
-					</code></pre> -->
-					<textarea id="code" class="code" name="code" mode="javascript" runnable="true">
-var box = [];
-box[0] = 'woof';						
-box[1] = 'meow';
-box.push['moo'];
-box.pop();
-
-					</textarea>
-					<button>Run</button>
+					
 
 				</section>
 				<!-- TODO runnable -->
 				<section>
 					<pre><code data-trim>
 
-var i = 0;
-box[i]; // ??
-box[1];
-box.pop(); //??
-box.length;
 					</code></pre>
 				</section>
 				<section>
-					<h3>Iteration</h3>
-					<textarea id="code" class="code" name="code" mode="javascript" runnable="true" cols="30" rows="10">
-var box = ['meow', 'Whoohooo!'];
-for(var i = 0; i < box.length; i++){
-						
-	console.log(i); //??
-						
-}
-					</textarea>
-					<button>Run</button>
-
+					
 				</section>
 				<section>
-					<h3>Exercise Time</h3>
-					<p>Use a for loop to output: "quack! sneeze! boom!"</p>
-					<textarea id="code" class="code" name="code" mode="javascript" runnable="true" cols="30" rows="10">
-						var noisesArray = ["quack", "sneeze", "boom"];
-
-					</textarea>
-					<button>Run</button>
+					
 
 				</section>
 				<!-- /Arrays -->
 
 				<!-- Objects -->
 				<section>
-					<h3>Objects</h3>
-					<p>{}</p>
+					
 				</section>
 				<section>
-					<h3>Assignment</h3>
-					<pre><code data-trim>
-
-var box = {};
-box.material = "cardboard";
-//OR
-var box = {"material" : "cardboard"};
-					</code></pre>
+					
 					<aside class="notes">
-						q:How many keys are in the object? 
-						What is the key name? 
-						What is the value?
+						
 					</aside>
 
 				</section>
 				<section>
-					<h3>Access w/dots</h3>
-					<textarea id="code" class="code" name="code" mode="javascript" runnable="true">
-
-var box = {};
-    					
-box.material = "cardboard";
-						
-var cb = box.material;
-
-cb; //??
-
-box.material = "titanium";
-
-cb; //??
-					</textarea>
-					<button>Run</button>
+					
 					<aside class="notes">
-						q: What is the new value after changing it?
+						
 					</aside>
 				</section>
 				<section>
-					<h3>Brackets</h3>
-					<pre><code data-trim>
-box["material type"] = "cardboard";
-box["1234"] = 1234;
-					</code></pre>
+					
 				</section>
 				<section>
-					<h3>Variables</h3>
-					<textarea id="code" class="code" name="code" mode="javascript" runnable="true">
-var box = {};
-						
-box["material"] = "cardboard";
-						
-						
-var key = "material";
-						
-box[key]; //??
-					</textarea>
-					<button>Run</button>
+					
 				</section>
 				<section>
-					<h3>Object Literals</h3>
-					<pre><code data-trim>
-var angelTheCat = { 
-	age: 18, 
-	furColor: "grey"
-}; 
-					</code></pre>
+					
 				</section>
 				<section>
-					<h3>Values</h3>
-					<pre><code data-trim>
-var angelTheCat = { 
-	age: 18, 
-	furColor: "grey", 
-	isAngelic: true, 
-	likes: ["catnip", "milk"], 
-	birthday: {"month": 7, "day": 17, year: 1994} 
-}; 
-					</code></pre>
+					
 				</section>
 				<section>
-					<h3><a href="http://jsfiddle.net/yonet3d/hpmwg1xy/" target="_blank">Exercise Time</a></h3>
+					
 				</section>
 				<!-- /Objects -->
 
 				<!-- Arrays of Objects -->
 				<section>
-					<h3>Arrays of Objects</h3>
-					<pre><code data-trim>
-var theAngelCats = [
-		{ name: "Angel", age: 18, furColor: "grey" },
-		{ name: "Evil", age: 14, furColor: "red" },
-		{ name: "Meh", age: 12, "Fur Color": "white" }
-	]
-
-					</code></pre>
+					
 				</section>
 				<section>
-				<pre><code data-trim>
-theAngelCats[0].name = ;//?
-theAngelCats[2]["Fur Color"] = ;//?
-					</code></pre>
-				</section>
-				<section>
-					<h3><a href="https://jsfiddle.net/yonet3d/j0aebpc7/1/" target="_blank">Exercise Time</a></h3>
-					<a href="http://en.wikipedia.org/wiki/List_of_animal_sounds" target="_blank">Useful Link</a>
+					
 				</section>
 				<!-- /Arrays of Objects -->
 
 				<!-- Nested Objects -->
 				<section>
-					<h3>Nested Objects</h3>
-					<img src="images/nested.jpeg" alt="nested">
-					<pre><code data-trim>
-var box = { "innerBox" : {} };
-					</code></pre>
+					
 				</section>
 				<section>
-					<pre><code data-trim>
-var doll = {
-	size: "large",
-	innerDoll : { size: medium}
-};
-box.innerDoll.innerInnerDoll = {size: small};
-console.log(doll);
-					</code></pre>
+					
 				</section>
 				<section>
-					<pre><code data-trim>
-var zoo = {
-	fox : {"3 fav foods": ["apple", "broccoli", "brussel sprouts"]}
-}
-zoo.fox["3 fav foods"];
-					</pre></code>
+					
 				</section>
 				<section>
-					<h3>Iterating Objects</h3>
-					<pre><code data-trim>
-var zoo = {
-	birds : 3,
-	bears: 5,
-	cats: 12,
-}
-for(var key in zoo) {
-	console.log(zoo[key], key);
-}
-					</pre></code>
-					<button>Run</button>
 
 				</section>
 				<section>
-					<h3><a href="https://jsfiddle.net/yonet3d/zmr6gqze/" target="_blank">Exercise Time</a></h3>
+					
 				</section>
 				<!-- /Nested Objects -->
 
 				<!-- Functions -->
 				<section>
-					<h3>Functions</h3>
-					<pre><code data-trim>
-var add = function(a, b) {
-	return a + b;
-};
-add(5,4);
-					</pre></code>
-					<aside class="notes">
-						Declaration/definition
-						Parameters
-						Function name/body
-						Invocation/Calltime
-						Parameters
+					
+					<aside>
 					</aside>
 
 				</section>
 				<section>
-					<h3>Definition</h3>
-					<pre><code data-trim>
-var nameImprover = function (name, adj) {
-  return 'Col ' + name + ' Mc' + adj + ' pants';
-};	
-					</pre></code>
-				</section>
-				<section>
-					<h3>Definition vs. Call-time</h3>
-					<pre><code data-trim>
-var nameImprover = function (name, adj) {
-  return 'Col ' + name + ' Mc' + adj + ' pants';
-};	
-
-nameImprver("Pamela", "fancy");
-					</pre></code>
-				</section>
-				<section>
-					<h3>Naming Arguments</h3>
-					<pre><code data-trim>
-var nameImprover = function (name, adj) {
-  return 'Col ' + name + ' Mc' + adj + ' pants';
-};	
-
-nameImprover("Pamela", "shiny");
-nameImprover("Aysegul", "fancy");
-					</pre></code>
-				</section>
-				<!-- /Functions -->
-
-				<!-- <section>
-					<textarea id="code" class="code" name="code" mode="javascript" runnable="true">
-						console.log("hello")
-					</textarea>
-					<button>Run</button>
 					
-				</section> -->
+				</section>
+				<section>
+					
+					<pre><code data-trim>
+
+					</pre></code>
+				</section>
+				<section>
+					
+					<pre><code data-trim>
+
+					</pre></code>
+				</section>
+
 				
 
 					
