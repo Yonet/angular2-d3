@@ -51,44 +51,112 @@
 
 				<!-- Welcome -->
 				<section>
+				<h3>Hello!</h3>
 					
 				</section>
 				<!-- /Welcome -->
-				
-				<!-- Arrays -->
+			<!-- Angular 1 / 2	 -->
 				<section>
-					
-					<aside class="notes">
-						q: How long is it? 
-						What is the index of this one? 
-						What is at the 0th index? 
-						When would you use an array? 
-						How do we find out the length?
-					</aside>
-				</section>
-				<section>
-					
+					<section>
+						<h3>how we define Angular 1</h3>
+						<pre><code data-trim>
+	angular.module('yon.tree-directive', [])
+	.directive('graph', function () {
+		return {
+			restrict: 'E',
+			scope: {
+				data: '=bindData',
+				width: '@width',
+				height:  '@height'
+			},
+			link: postLink
 
+		};
+	}
+						</code></pre>
+					</section>
+					<!-- TODO runnable -->
+					<section>
+						<h3>How we use it in html</h3>
+						<pre><code data-trim>
+<div ng-app="app">
+	<div ng-controller="MainController">
+		<graph
+		      	bind-data="exampleData"
+		        width="900"
+		        height="2000"
+		    >
+		</graph>
+	</div>
+</div>
+						</code></pre>
+					</section>
+
+					<!-- Angular 2 -->
+					<section>
+						<h3>Import stuff</h3>
+						<pre><code data-trim>
+import {Component, Template} from 'angular2/angular2';
+import {NgElement} from 'angular2/angular2';
+
+@Component({
+    selector: 'graph',
+    bind: {
+		'data': 'data',
+		'width': 'width',
+		'height': 'height'
+	}
+})
+@Template({
+    inline: '<div></div>',
+    directives: []
+})
+						</code></pre>
+						<aside class="notes">
+							it is very similar to Angular 1.
+							Import the modules to use
+							selector is the component name
+							bind = scope
+							template is the same
+
+						</aside>
+
+						
+					</section>
 				</section>
-				<!-- TODO runnable -->
+				<!-- /Angular 1/ 2 -->
+
+				<!-- Defining your component -->
 				<section>
+					<h3>Graph class</h3>
 					<pre><code data-trim>
+export class Graph {
+	name: string;
+	constructor(el: NgElement) {
+		///postLink function
 
+	}
+}
+						
 					</code></pre>
-				</section>
-				<section>
-					
-				</section>
-				<section>
+					<aside class="notes">
+						el.domElement == el[0]
+					</aside>
 					
 
 				</section>
-				<!-- /Arrays -->
+				<!-- /Defining your component -->
 
-				<!-- Objects -->
+
+				<!-- Ang2 html -->
 				<section>
-					
+					<h3>Add it to html</h3>
+					<pre><code>
+<graph [data]="stateData"></graph>
+					</code></pre>
+				
 				</section>
+				<!-- Ang2 html -->
 				<section>
 					
 					<aside class="notes">
@@ -103,71 +171,96 @@
 					</aside>
 				</section>
 				<section>
-					
-				</section>
-				<section>
-					
-				</section>
-				<section>
-					
-				</section>
-				<section>
-					
-				</section>
-				<section>
-					
-				</section>
-				<!-- /Objects -->
+					<h3></h3>
+					<pre><code data-trim>
 
-				<!-- Arrays of Objects -->
-				<section>
+					</pre></code>
 					
 				</section>
-				<section>
-					
-				</section>
-				<!-- /Arrays of Objects -->
 
-				<!-- Nested Objects -->
+				<!--  -->
 				<section>
-					
-				</section>
-				<section>
-					
-				</section>
-				<section>
-					
-				</section>
-				<section>
+				<h3></h3>
+					<pre><code data-trim>
 
-				</section>
-				<section>
-					
-				</section>
-				<!-- /Nested Objects -->
-
-				<!-- Functions -->
-				<section>
-					
-					<aside>
+					</pre></code>
+					<aside class="notes">
+						
 					</aside>
+				</section>
+				<!--/  -->
 
-				</section>
+				<!--  -->
 				<section>
-					
-				</section>
-				<section>
-					
+				<h3></h3>
 					<pre><code data-trim>
 
 					</pre></code>
+					<aside class="notes">
+						
+					</aside>
 				</section>
+				<!--/  -->
+
+				<!--  -->
 				<section>
-					
+				<h3></h3>
 					<pre><code data-trim>
 
 					</pre></code>
+					<aside class="notes">
+						
+					</aside>
 				</section>
+				<!--/  -->
+
+				<!--  -->
+				<section>
+				<h3></h3>
+					<pre><code data-trim>
+
+					</pre></code>
+					<aside class="notes">
+						
+					</aside>
+				</section>
+				<!--/  -->
+
+				<!--  -->
+				<section>
+				<h3></h3>
+					<pre><code data-trim>
+
+					</pre></code>
+					<aside class="notes">
+						
+					</aside>
+				</section>
+				<!--/  -->
+
+				<!--  -->
+				<section>
+				<h3></h3>
+					<pre><code data-trim>
+
+					</pre></code>
+					<aside class="notes">
+						
+					</aside>
+				</section>
+				<!--/  -->
+
+				<!--  -->
+				<section>
+				<h3></h3>
+					<pre><code data-trim>
+
+					</pre></code>
+					<aside class="notes">
+						
+					</aside>
+				</section>
+				<!--/  -->
 
 				
 
