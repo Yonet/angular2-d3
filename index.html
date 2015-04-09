@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title>Ng-Vegas Angular2- d3.js presentation</title>
+    <title>Ng-Vegas Angular2 - d3.js presentation</title>
 
     <meta name="description" content="">
     <meta name="author" content="Aysegul Yonet,Patrick Stapleton">
@@ -19,13 +19,6 @@
 
     <!-- Code syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
-    <!-- CodeMirror links -->
-    <script src="lib/codemirror.js"></script>
-    <link rel="stylesheet" href="js/lib/css/codemirror.css">
-    <script src="lib/js/javascript/javascript.js"></script>
-    <script src="js/addon/runmode/runmode.js"></script>
-    <!--  <script src="../mode/xml/xml.js"></script> -->
-    <!-- /CodeMirror links -->
 
     <!-- Printing and PDF exports -->
     <script>
@@ -51,8 +44,13 @@
 
         <!-- Welcome -->
         <section>
-        <h3>Hello!</h3>
-          
+          <h3>Hello!</h3>
+          <a href="https://twitter.com/gdi2290" target="_blank">@gdi2290</a>
+          <a href="https://twitter.com/AysegulYonet" target="_blank">@AysegulYonet</a>
+          <aside class="notes">
+            Hi, introduce each other
+            We are here to ease the pain. 
+          </aside>
         </section>
         <!-- /Welcome -->
 
@@ -69,6 +67,11 @@
     height="2000">
 </graph>
             </code></pre>
+            <aside class="notes">
+              this is our interface for angular AAANNNND angular 2!!!
+              today we will show you both versions.
+              //Find gifs
+            </aside>
           </section>
 
           <section>
@@ -91,6 +94,14 @@ angular.module('App', [])
 
 });
             </code></pre>
+            <aside class="notes">
+              there is three parts to creating a directive in angular 
+              (heighlight the 3 sections)
+              1 requiring the module
+              2 metadata
+              3 postlink function
+
+            </aside>
           </section>
 
           <!-- Angular 2 -->
@@ -109,8 +120,7 @@ import {NgElement} from 'angular2/angular2';
   }
 })
 @Template({
-  inline: '<div></div>',
-  directives: []
+  inline: '<svg></svg>'
 })
 class Graph {
   constructor() { // code }
@@ -122,6 +132,7 @@ class Graph {
               selector is the component name
               bind = scope
               template is the same
+              (highlght here too)
 
             </aside>
 
@@ -159,14 +170,17 @@ import {NgElement} from 'angular2/angular2';
   }
 })
 @Template({
-  inline: '<div></div>',
-  directives: []
+  inline: '<svg></svg>'
 })
 class Graph {
   constructor() { // code }
 }
 
             </code></pre>
+            <aside class="notes">
+              highlight and write modules, metadata, funtionality
+              compare next to each other, style it to be next to each other if possible
+            </aside>
           </section>
           </section>
         </section>
@@ -177,13 +191,11 @@ class Graph {
           <h3>Graph class</h3>
           <pre><code data-trim>
 export class Graph {
-  name: string;
   constructor(el: NgElement) {
     // postLink function 
 
   }
 }
-            
           </code></pre>
           <aside class="notes">
           // ng2
@@ -192,6 +204,7 @@ export class Graph {
             el[0]
 
           this is ur postLink, but now it's a class =D
+          el is our element that has been injected by it's Type in this case it's Type of NgElement.
           </aside>
 
         </section>
@@ -205,8 +218,7 @@ export class Graph {
     this._data = null;
     this.diagonal = d3.svg.diagonal();
     this.cluster = d3.layout.cluster();
-    this.svg = d3.select(el.domElement)
-    .append('svg').append('g');
+    this.svg = d3.select(el.domElement);
   }
 
   get data() {
@@ -226,7 +238,8 @@ export class Graph {
 
           </pre></code>
           <aside class="notes">
-            
+            briefly mention getters and setters, linking up the render function
+            (Look up onChange lifecycle)
           </aside>
         </section>
         <!--/Data detection  -->
@@ -238,21 +251,55 @@ export class Graph {
           <pre><code>
 <graph [data]="stateData"></graph>
           </code></pre>
-        
         </section>
         <!-- Ang2 html -->
-        <section>
-          
-          <aside class="notes">
-            
-          </aside>
-
-        </section>
-
 
         <!--  -->
         <section>
         <h3></h3>
+          <pre><code data-trim>
+import {Component, Template} from 'angular2/angular2';
+import {NgElement} from 'angular2/angular2';
+
+@Component({
+  selector: 'graph',
+  bind: {
+    'data': 'data',
+    'width': 'width',
+    'height': 'height'
+  }
+})
+@Template({
+  inline: '<svg></svg>'
+})
+export class Graph {
+  constructor(el: NgElement) {
+
+  }
+
+  get data() {
+    return this._data;
+  }
+  set data(value) {
+    // ...
+    return this._data;
+  }
+
+  render(data) {
+    this._renderD3(data, this.cluster, this.svg, this.diagonal);
+  }
+
+}
+          </pre></code>
+          <aside class="notes">
+          Recap highlight maybe
+          </aside>
+        </section>
+        <!--/  -->
+
+        <!--  -->
+        <section>
+        <h3>How to write the d3 render function.</h3>
           <pre><code data-trim>
 
           </pre></code>
@@ -321,25 +368,8 @@ export class Graph {
           </aside>
         </section>
         <!--/  -->
-
-        <!--  -->
-        <section>
-        <h3></h3>
-          <pre><code data-trim>
-
-          </pre></code>
-          <aside class="notes">
-            
-          </aside>
-        </section>
-        <!--/  -->
-
-        
-
-          
 
       </div>
-
     </div>
 
     <script src="lib/js/head.min.js"></script>

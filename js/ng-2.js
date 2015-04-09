@@ -10,11 +10,9 @@ import {NgElement} from 'angular2/angular2';
 	}
 })
 @Template({
-	inline: '<svg></svg>',//?
-	directives: []
+	inline: '<svg></svg>'//?
 })
 export class Graph {
-	name: string;
 	constructor(el: NgElement) {
 		this._data = null;
 		console.log('in constructor ', this._data);
