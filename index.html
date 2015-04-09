@@ -1,280 +1,352 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
 
-		<title>Ng-Vegas Angular2- d3.js presentation</title>
+    <title>Ng-Vegas Angular2- d3.js presentation</title>
 
-		<meta name="description" content="">
-		<meta name="author" content="Aysegul Yonet,Patrick Stapleton">
+    <meta name="description" content="">
+    <meta name="author" content="Aysegul Yonet,Patrick Stapleton">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/blood.css" id="theme">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/blood.css" id="theme">
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
-		<!-- CodeMirror links -->
-		<script src="lib/codemirror.js"></script>
-		<link rel="stylesheet" href="js/lib/css/codemirror.css">
-		<script src="lib/js/javascript/javascript.js"></script>
-		<script src="js/addon/runmode/runmode.js"></script>
-		<!--  <script src="../mode/xml/xml.js"></script> -->
-		<!-- /CodeMirror links -->
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- CodeMirror links -->
+    <script src="lib/codemirror.js"></script>
+    <link rel="stylesheet" href="js/lib/css/codemirror.css">
+    <script src="lib/js/javascript/javascript.js"></script>
+    <script src="js/addon/runmode/runmode.js"></script>
+    <!--  <script src="../mode/xml/xml.js"></script> -->
+    <!-- /CodeMirror links -->
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
 
-	<body>
+  <body>
 
-		<div class="reveal">
+    <div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
 
 
-				<!-- Welcome -->
-				<section>
-				<h3>Hello!</h3>
-					
-				</section>
-				<!-- /Welcome -->
-			<!-- Angular 1 / 2	 -->
-				<section>
-					<section>
-						<h3>how we define Angular 1</h3>
-						<pre><code data-trim>
-	angular.module('yon.tree-directive', [])
-	.directive('graph', function () {
-		return {
-			restrict: 'E',
-			scope: {
-				data: '=bindData',
-				width: '@width',
-				height:  '@height'
-			},
-			link: postLink
+        <!-- Welcome -->
+        <section>
+        <h3>Hello!</h3>
+          
+        </section>
+        <!-- /Welcome -->
 
-		};
-	}
-						</code></pre>
-					</section>
-					<!-- TODO runnable -->
-					<section>
-						<h3>How we use it in html</h3>
-						<pre><code data-trim>
-<div ng-app="app">
-	<div ng-controller="MainController">
-		<graph
-		      	bind-data="exampleData"
-		        width="900"
-		        height="2000"
-		    >
-		</graph>
-	</div>
-</div>
-						</code></pre>
-					</section>
+      <!-- Angular 1 / 2   -->
+        <section>
+          <!-- TODO runnable -->
+          <section>
+            <h3>How we use it in html</h3>
+            <pre><code data-trim>
 
-					<!-- Angular 2 -->
-					<section>
-						<h3>Import stuff</h3>
-						<pre><code data-trim>
+<graph
+    bind-data="exampleData"
+    width="900"
+    height="2000">
+</graph>
+            </code></pre>
+          </section>
+
+          <section>
+            <h3>how we define Angular 1</h3>
+            <pre><code data-trim>
+angular.module('App', [])
+.directive('graph', function() {
+
+  return {
+    restrict: 'E',
+    scope: {
+      data:   '=bindData', // bindings
+      width:  '@width',    // static value
+      height: '@height'    // static value
+    },
+    link: Graph
+  };
+  // postLink function
+  function Graph() { // code };
+
+});
+            </code></pre>
+          </section>
+
+          <!-- Angular 2 -->
+          <section>
+            <h3>How we define Angular 2</h3>
+            <pre><code data-trim>
 import {Component, Template} from 'angular2/angular2';
 import {NgElement} from 'angular2/angular2';
 
 @Component({
-    selector: 'graph',
-    bind: {
-		'data': 'data',
-		'width': 'width',
-		'height': 'height'
-	}
+  selector: 'graph',
+  bind: {
+    'data':   'data',
+    'width':  'width',
+    'height': 'height'
+  }
 })
 @Template({
-    inline: '<div></div>',
-    directives: []
+  inline: '<div></div>',
+  directives: []
 })
-						</code></pre>
-						<aside class="notes">
-							it is very similar to Angular 1.
-							Import the modules to use
-							selector is the component name
-							bind = scope
-							template is the same
-
-						</aside>
-
-						
-					</section>
-				</section>
-				<!-- /Angular 1/ 2 -->
-
-				<!-- Defining your component -->
-				<section>
-					<h3>Graph class</h3>
-					<pre><code data-trim>
-export class Graph {
-	name: string;
-	constructor(el: NgElement) {
-		///postLink function
-
-	}
+class Graph {
+  constructor() { // code }
 }
-						
-					</code></pre>
-					<aside class="notes">
-						el.domElement == el[0]
-					</aside>
-					
+            </code></pre>
+            <aside class="notes">
+              it is very similar to Angular 1.
+              Import the modules to use
+              selector is the component name
+              bind = scope
+              template is the same
 
-				</section>
-				<!-- /Defining your component -->
+            </aside>
+
+            
+          </section>
+          <section>
+            <pre><code data-trim>
+angular.module('App', [])
+.directive('graph', function() {
+
+  return {
+    restrict: 'E',
+    scope: {
+      data:   '=bindData', // bindings
+      width:  '@width',    // static value
+      height: '@height'    // static value
+    },
+    link: Graph
+  };
+  // postLink function
+  function Graph() { // code };
+
+});
+            </code></pre>
+             <pre><code data-trim>
+import {Component, Template} from 'angular2/angular2';
+import {NgElement} from 'angular2/angular2';
+
+@Component({
+  selector: 'graph',
+  bind: {
+    'data':   'data',
+    'width':  'width',
+    'height': 'height'
+  }
+})
+@Template({
+  inline: '<div></div>',
+  directives: []
+})
+class Graph {
+  constructor() { // code }
+}
+
+            </code></pre>
+          </section>
+          </section>
+        </section>
+        <!-- /Angular 1/ 2 -->
+
+        <!-- Defining your component -->
+        <section>
+          <h3>Graph class</h3>
+          <pre><code data-trim>
+export class Graph {
+  name: string;
+  constructor(el: NgElement) {
+    // postLink function 
+
+  }
+}
+            
+          </code></pre>
+          <aside class="notes">
+          // ng2
+            el.domElement
+          // ng1
+            el[0]
+
+          this is ur postLink, but now it's a class =D
+          </aside>
+
+        </section>
+        <!-- /Defining your component -->
+
+        <!-- Data detection -->
+        <section>
+        <h3></h3>
+          <pre><code data-trim>
+  constructor(el: NgElement) {
+    this._data = null;
+    this.diagonal = d3.svg.diagonal();
+    this.cluster = d3.layout.cluster();
+    this.svg = d3.select(el.domElement)
+    .append('svg').append('g');
+  }
+
+  get data() {
+    return this._data;
+  }
+  set data(value) {
+    this._data = value;
+
+    this.render(this._data);
+
+    return this._data;
+  }
+
+  render(data) {
+    this._renderD3(data, this.cluster, this.svg, this.diagonal);
+  }
+
+          </pre></code>
+          <aside class="notes">
+            
+          </aside>
+        </section>
+        <!--/Data detection  -->
 
 
-				<!-- Ang2 html -->
-				<section>
-					<h3>Add it to html</h3>
-					<pre><code>
+        <!-- Ang2 html -->
+        <section>
+          <h3>Add it to html</h3>
+          <pre><code>
 <graph [data]="stateData"></graph>
-					</code></pre>
-				
-				</section>
-				<!-- Ang2 html -->
-				<section>
-					
-					<aside class="notes">
-						
-					</aside>
+          </code></pre>
+        
+        </section>
+        <!-- Ang2 html -->
+        <section>
+          
+          <aside class="notes">
+            
+          </aside>
 
-				</section>
-				<section>
-					
-					<aside class="notes">
-						
-					</aside>
-				</section>
-				<section>
-					<h3></h3>
-					<pre><code data-trim>
+        </section>
 
-					</pre></code>
-					
-				</section>
 
-				<!--  -->
-				<section>
-				<h3></h3>
-					<pre><code data-trim>
+        <!--  -->
+        <section>
+        <h3></h3>
+          <pre><code data-trim>
 
-					</pre></code>
-					<aside class="notes">
-						
-					</aside>
-				</section>
-				<!--/  -->
+          </pre></code>
+          <aside class="notes">
+            
+          </aside>
+        </section>
+        <!--/  -->
 
-				<!--  -->
-				<section>
-				<h3></h3>
-					<pre><code data-trim>
+        <!--  -->
+        <section>
+        <h3></h3>
+          <pre><code data-trim>
 
-					</pre></code>
-					<aside class="notes">
-						
-					</aside>
-				</section>
-				<!--/  -->
+          </pre></code>
+          <aside class="notes">
+            
+          </aside>
+        </section>
+        <!--/  -->
 
-				<!--  -->
-				<section>
-				<h3></h3>
-					<pre><code data-trim>
+        <!--  -->
+        <section>
+        <h3></h3>
+          <pre><code data-trim>
 
-					</pre></code>
-					<aside class="notes">
-						
-					</aside>
-				</section>
-				<!--/  -->
+          </pre></code>
+          <aside class="notes">
+            
+          </aside>
+        </section>
+        <!--/  -->
 
-				<!--  -->
-				<section>
-				<h3></h3>
-					<pre><code data-trim>
+        <!--  -->
+        <section>
+        <h3></h3>
+          <pre><code data-trim>
 
-					</pre></code>
-					<aside class="notes">
-						
-					</aside>
-				</section>
-				<!--/  -->
+          </pre></code>
+          <aside class="notes">
+            
+          </aside>
+        </section>
+        <!--/  -->
 
-				<!--  -->
-				<section>
-				<h3></h3>
-					<pre><code data-trim>
+        <!--  -->
+        <section>
+        <h3></h3>
+          <pre><code data-trim>
 
-					</pre></code>
-					<aside class="notes">
-						
-					</aside>
-				</section>
-				<!--/  -->
+          </pre></code>
+          <aside class="notes">
+            
+          </aside>
+        </section>
+        <!--/  -->
 
-				<!--  -->
-				<section>
-				<h3></h3>
-					<pre><code data-trim>
+        <!--  -->
+        <section>
+        <h3></h3>
+          <pre><code data-trim>
 
-					</pre></code>
-					<aside class="notes">
-						
-					</aside>
-				</section>
-				<!--/  -->
+          </pre></code>
+          <aside class="notes">
+            
+          </aside>
+        </section>
+        <!--/  -->
 
-				<!--  -->
-				<section>
-				<h3></h3>
-					<pre><code data-trim>
+        <!--  -->
+        <section>
+        <h3></h3>
+          <pre><code data-trim>
 
-					</pre></code>
-					<aside class="notes">
-						
-					</aside>
-				</section>
-				<!--/  -->
+          </pre></code>
+          <aside class="notes">
+            
+          </aside>
+        </section>
+        <!--/  -->
 
-				
+        
 
-					
+          
 
-			</div>
+      </div>
 
-		</div>
+    </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
-		<!-- CodeMirror Init -->
-		<script>
+    <!-- CodeMirror Init -->
+    <script>
             window.onload = function() {
                 window.editor = CodeMirror.fromTextArea(code, {
                     mode: "javascript",
@@ -295,30 +367,30 @@ export class Graph {
         </script>
         <!-- /CodeMirror -->
 
-		<script>
+    <script>
 
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
-				]
-			});
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
 
-		</script>
+    </script>
 
-	</body>
+  </body>
 </html>
