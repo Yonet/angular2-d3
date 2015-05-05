@@ -52,6 +52,7 @@
 					<aside class="notes">
 						Hi, introduce each other
 						We are here to ease the pain. 
+						I will talk about how you can build Angular 1 directives with Angular 2 in mind and Patrick will show you how to make the switch from 1 to 2.
 					</aside>
 				</section>
 				<!-- /Welcome -->
@@ -62,7 +63,7 @@
 					<!-- What -->
 					<section>
 
-						<h4>What is a d3 Angular component</h4>
+						<h4>What is a d3 Angular component?</h4>
 						<!-- TODO Angular d3 web component images in a list -->
 						<aside class="notes">
 						Directives give us a way to encapsulate and reuse our visualizations by allowing us to essentially create our own HTML tags.
@@ -81,10 +82,11 @@
 		width="900"
 		height="2000">
 </graph>
+<pie-chart data="someOtherData"></pie-chart>
 						</code></pre>
 						<aside class="notes">
+							So that we can declartively use our prepared components with any data an   ywhere. 
 							this is our interface for angular AAANNNND angular 2!!!
-							today we will show you both versions.
 							By making the accessors configurable, we avoid having a directive that assumes a particular input format. This means our directive can accept any type of data array so long as we tell it how to pluck the specific values out of the data using the accessor expression.
 							//Find gifs
 						</aside>
@@ -140,7 +142,7 @@ Our directive “know” nothing about where it got its data and only care about
 Using $http service instead of d3.json() allows us to avoid having to call $scope.$apply() directly.
 						</aside>
 					</section>
-					<!--/  -->
+					<!--/ Getting Data -->
 
 
 					<!--  -->
@@ -184,15 +186,25 @@ scope.$watch('data', function(data){
 
 					<!--  -->
 				<section>
-					<h3>What you can do now?</h3>
+					<h3>Using TypeScript</h3>
 					<ul>
-						<li><a href="https://github.com/borisyankov/DefinitelyTyped/blob/master/angularjs/angular.d.ts" target="_blank"> Use TypedScript</a></li>
+						<li><a href="https://github.com/borisyankov/DefinitelyTyped/blob/master/angularjs/angular.d.ts" target="_blank">Include DefinitelyTyped Type definitions for Angular JS 1.3+</a></li>
 					</ul>
 					<pre><code data-trim>
+module todos {
 
+    export function graph(): ng.IDirective {
+        return {
+            link: ($scope: ng.IScope, element: JQuery, attributes: any) => {
+                ...construction function goes here.
+            }
+        };
+    }
+}
 					</pre></code>
 					<aside class="notes">
 					Checkout definetly typed for Type definitions for Angular JS 1.3+
+					You can do as much or as little as you want
 						
 					</aside>
 				</section>
