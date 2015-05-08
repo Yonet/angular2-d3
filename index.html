@@ -51,7 +51,7 @@
 					<p>Slides: <a href="http://bit.ly/ngVegasD3">http://bit.ly/ngVegasD3</a></p>
 					<aside class="notes">
 						Hi, introduce each other
-						We are here to show you creating d3 visualizations with Angular 1 and how to prepare for Angular 2. 
+						We are here to show you creating d3 visualizations with Angular 1 and migrating to Angular 2. 
 						I will talk about how you can build Angular 1 directives with Angular 2 in mind and Patrick will show you how to make the switch from 1 to 2.
 					</aside>
 				</section>
@@ -67,11 +67,9 @@
 						<img src="images/d3examples.png">
 						<!-- TODO Angular d3 web component images in a list -->
 						<aside class="notes">
-						D3.js is a cool JavaScript library for manipulating documents based on data. It is a bunch of helper functions that makes working with DOM and DATA very pleasant. Why do we need Angular than? Because D3 is not a plug and play charts library. But by creating our own d3 components we can have our own encapsulate and reuse our visualizations.
+						D3.js is a cool JavaScript library for manipulating documents based on data. It is a collection of helper functions that makes working with DOM and DATA very pleasant. Why do we need Angular than? Because D3 is not a plug and play charts library like google charts. But by creating our own d3 components we can have our own encapsulated and reuseable visualizations.
+						We can take advantage of flexibility of d3 to make our visualizations as we like them and use angular to include interactivity. 
 
-		
-						
-						Also Angular makes it easy to include interactivity.
 						</aside>
 					</section>
 					<section>
@@ -85,8 +83,13 @@
 						<aside class="notes">
 						Let's talk about the angular way of integrating d3.
 						All your D3 logic and presentation must be contained within a directive
+
 						Use HTML-declarative syntax to feed of data to your directive instances
-						By doing that, you can store the data in your controller, passing it to your D3 directive via data binding of parameters
+
+						By doing that, you can store the data in your controller, passing it to your D3 directive via data binding of parameters.
+
+						Another cool use of Angular and d3 is creating your custom filters. 
+						You can take advantage of d3's formatting method's and use it easily anywhere in your application. 
 						</aside>
 					</section>
 					<!-- /What -->
@@ -129,7 +132,7 @@
 
 						</code></pre>
 						<aside class="notes">
-							Or it can look like this. You can bind an isolated scope property to a DOM attribute to customize your graph. 
+							Or it can look like this. You can bind isolated scope properties to any DOM attribute to customize your graph. I think this is a very powerful tool. 
 						</aside>
 					</section>
 					<section>
@@ -143,7 +146,7 @@
 						</code></pre>
 						<img src="images/d3calendar.png">
 						<aside class="notes">
-							We can use other angular directives like ng-repeat to make a lot of the graphs. 
+							We can use other angular directives like ng-repeat to make a lot of the graphs.  
 						</aside>
 					</section>
 
