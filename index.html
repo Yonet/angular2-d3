@@ -163,7 +163,7 @@ angular.module('App', [])
 		scope: {
 			data:   '=bindData', // bindings
 			width:  '@width',    // static value
-			height: '@height'    // static value
+			color: '&color'    // expression
 		},
 		link: Graph
 	};
@@ -206,7 +206,7 @@ scope.$watch('data', function(data){
 						</pre></code>
 						<aside class="notes">
 						Enter and exit is 
-						$watch is responsible for adding or removing the necessary arc "path" tags and combination with d3’s .enter() .exit() selections.
+						$watch is responsible for adding or removing the necessary div tags and combination with d3’s .enter() .exit() selections.
 							
 						</aside>
 					</section>
