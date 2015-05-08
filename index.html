@@ -102,7 +102,7 @@
 						<aside class="notes">
 							We can declartively use our prepared components with any data anywhere. 
 							this is our interface for angular AAANNNND angular 2!!!
-							By making the accessors configurable, we avoid having a directive that assumes a particular input format. This means our directive can accept any type of data array so long as we tell it how to pluck the specific values out of the data using the accessor expression.
+							
 							//Find gifs
 						</aside>
 					</section>
@@ -250,6 +250,17 @@ $http.get('/yourApiUrl').
 				<!--  -->
 				<section>
 				<h3>Truth about the data</h3>
+					<a href="http://jsfiddle.net/yonet3d/42y48ewm/1/">Example</a>
+					<a href="https://github.com/mbostock/d3/wiki/API-Reference#working-with-arrays">Array Functions</a>
+					<aside class="notes">
+							Data is never in the format that you want it to be. 
+							There are couple of places you can deal with this. One of them is in your controller, you can manupulate your data. D3 has all the array methods that you need. 
+						 
+					</aside>
+					
+				</section>
+				<!--/  -->
+				<section>
 					<pre><code data-trim>
 <bar-graph graph-data="data" accessor="d.value"></bar-graph>
 
@@ -260,11 +271,10 @@ divs.style("width", function (d) {
 					
 					<a href="http://jsfiddle.net/yonet3d/ckg9vdLq/4/">Accessor JSFiddle</a>
 					<aside class="notes">
-						Data is never in the format that you want it to be. 
 						 By making the accessors configurable, we avoid having a directive that assumes a particular input format. This means our directive can accept any type of data array so long as we tell it how to pluck the specific values out of the data using the accessor expression.
 					</aside>
+					
 				</section>
-				<!--/  -->
 
 					
 
@@ -311,7 +321,7 @@ module graphs {
 					</aside>
 				</section>
 				<!--/  -->
-								<!--  -->
+				<!--  -->
 					<section>
 						<h3>Create some cool things</h3>
 						<a href="http://bl.ocks.org/hlvoorhees/5986172" target="_blank">3D Scatter Plot</a>
@@ -335,7 +345,7 @@ module graphs {
 				<!--/  -->
 
 					<!-- Angular 2 -->
-					<section>
+					<!-- <section>
 						<h3>How we define Angular 2</h3>
 						<pre><code data-trim>
 import {Component, Template} from 'angular2/angular2';
@@ -367,7 +377,7 @@ class Graph {
 						</aside>
 
 						
-					</section>
+					</section> -->
 					<!--  -->
 			<!-- 	<section>
 				<h3></h3>
@@ -380,7 +390,7 @@ class Graph {
 				</section> -->
 				<!--/  -->
 				<!--  -->
-				<section>
+				<!-- <section>
 				<h3></h3>
 					<pre><code data-trim>
 
@@ -389,7 +399,6 @@ class Graph {
 						
 					</aside>
 				</section>
-				<!--/  -->
 					<section>
 						<pre><code data-trim>
 angular.module('App', [])
@@ -432,11 +441,11 @@ class Graph {
 					</section>
 
 					</section>
-				</section>
+				</section> -->
 				<!-- /Angular 1/ 2 -->
-				<section>
+				<!-- <section>
 					<h3>Let's write some Angular 1</h3>
-				</section>
+				</section> --> 
 
 				<!-- Defining your component -->
 <!--         <section>
@@ -463,7 +472,7 @@ export class Graph {
 				<!-- /Defining your component -->
 
 				<!-- Data detection -->
-				<section>
+				<!-- <section>
 					<section>
 				<h3></h3>
 					<pre><code data-trim>
@@ -519,21 +528,19 @@ class Graph {
 }
 </code></pre>
 					</section>
-				</section>
+				</section> -->
 				
 				<!--/Data detection  -->
 
 
 				<!-- Ang2 html -->
-				<section>
+				<!-- <section>
 					<h3>Add it to html</h3>
 					<pre><code data-trim>
 <graph [data]="stateData"></graph>
 					</code></pre>
 				</section>
-				<!-- Ang2 html -->
 
-				<!--  -->
 				<section>
 				<h3></h3>
 					<pre><code data-trim>
@@ -573,11 +580,11 @@ export class Graph {
 					<aside class="notes">
 					Recap highlight maybe
 					</aside>
-				</section>
+				</section>  -->
 				<!--/  -->
 
 				<!--  -->
-				<section>
+				<!-- <section>
 				<h3>How to write the d3 render function.</h3>
 					<pre><code data-trim>
 
@@ -585,7 +592,7 @@ export class Graph {
 					<aside class="notes">
 						
 					</aside>
-				</section>
+				</section> -->
 				<!--/  -->
 
 				<!--  -->
@@ -623,10 +630,6 @@ export class Graph {
 					</aside>
 				</section>
 				<!--/  -->
-
-				
-
-			
 
 			</div>
 		</div>
