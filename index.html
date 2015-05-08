@@ -48,7 +48,7 @@
 					<a href="https://twitter.com/AysegulYonet" target="_blank">@AysegulYonet</a>
 					<br>
 					<a href="https://twitter.com/gdi2290" target="_blank">@gdi2290</a> (aka PatrickJS)
-					
+					<p>Slides: <a href="http://bit.ly/ngVegasD3">http://bit.ly/ngVegasD3</a></p>
 					<aside class="notes">
 						Hi, introduce each other
 						We are here to show you creating d3 visualizations with Angular 1 and how to prepare for Angular 2. 
@@ -112,7 +112,6 @@
 
 <graph 
 	bind-data="myData"
-	accessorFunction="accessDateFunction()"
 	showXAxis="true"
 	showYAxis="true"
 	tooltips="true"
@@ -124,6 +123,7 @@
 	margin="{left:50,top:50,bottom:50,right:50}"
 	showValues="true"
 	showLegend="true"
+	accessorFunction="accessDateFunction()"
 	useInteractiveGuideLine="true"
 	>
 </graph>
@@ -164,14 +164,16 @@ angular.module('App', [])
 		},
 		link: Graph
 	};
-	// postLink function
-	function Graph() { // d3 code };
+
+	function Graph(scope, element, attrs) { // d3 code 
+	};
 
 });
 						</code></pre>
+						<a href="http://jsfiddle.net/yonet3d/ckg9vdLq/2/" target="_blank">JsFiddle</a>
 						<aside class="notes">
 							Directives have a link function which is essentially a “constructor”.
-							It contains the your d3 code that assumes some sort of data but doesn't know about your data. 
+							It contains your d3 code that assumes some sort of data but doesn't know about your data. 
 
 						</aside>
 					</section>
@@ -186,8 +188,7 @@ d3.json('data.json', function(err, data){
 d3.csv('data.csv', function(err, data){...})
 						</pre></code>
 						<aside class="notes">
-						D3 comes with a set of useful utilities for loading data from remote sources. The
-most common being the d3.json() or d3.csv()‘ functions. If used properly, we can continue to use
+						D3 comes with a set of useful utilities for loading data from remote sources. The most common being the d3.json() or d3.csv()‘ functions. If used properly, we can continue to use
 these same functions but Angular also offers its own alternatives for loading in data.
 Our directive “know” nothing about where it got its data and only care about if or when it gets data and when that data changes.
 Using $http service instead of d3.json() allows us to avoid having to call $scope.$apply() directly.
