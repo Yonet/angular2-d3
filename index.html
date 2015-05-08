@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Ng-Vegas Angular2 - d3.js presentation</title>
+
+		<meta name="description" content="">
+		<meta name="author" content="Aysegul Yonet,Patrick Stapleton">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+
+				<!-- Welcome -->
+				<section>
+					<h3>How to Angular 2 with d3</h3>
+					<a href="https://twitter.com/AysegulYonet" target="_blank">@AysegulYonet</a>
+					<br>
+					<a href="https://twitter.com/gdi2290" target="_blank">@gdi2290</a> (aka PatrickJS)
+					
+					<aside class="notes">
+						Hi, introduce each other
+						We are here to show you creating d3 visualizations with Angular 1 and how to prepare for Angular 2. 
+						I will talk about how you can build Angular 1 directives with Angular 2 in mind and Patrick will show you how to make the switch from 1 to 2.
+					</aside>
+				</section>
+				<!-- /Welcome -->
+		 
+
+			<!-- Angular 1 / d3  -->
+				<section>
+					<!-- What -->
+					<section>
+
+						<h4>What is a <a href="http://d3js.org/" target="_blank">d3</a> Angular component?</h4>
+
+						<!-- TODO Angular d3 web component images in a list -->
+						<aside class="notes">
+						D3.js is a cool JavaScript library for manipulating documents based on data. It is a bunch of helper functions that makes working with DOM and DATA very pleasant. Why do we need Angular than? Because D3 is not a plug and play charts library. But by creating our own d3 components we can have our own encapsulate and reuse our visualizations.
+
+						You know how to customize D3.js graphs using examples found in search engines, but you struggle to reuse them and aren’t quite happy with the quality of the code itself.
+						<!-- Directives give us a way to encapsulate and reuse our visualizations by allowing us to essentially create our own HTML tags. -->
+						
+						Also Angular makes it easy to include interactivity.
+						</aside>
+					</section>
+					<section>
+						<h4>“The Angular way” of integrating D3?</h4>
+						<ul>
+							<li class="fragment">D3 logic in a directive</li>
+							<li class="fragment">Use HTML-declarative syntax to feed of data to your directive instances</li>
+							<li class="fragment">Store the data in your controller</li>
+							<li class="fragment">Create Angular filters using D3 helper functions.</li>
+						</ul>
+						<aside class="notes">
+						Let's talk about the angular way of integrating d3.
+						All your D3 logic and presentation must be contained within a directive
+						Use HTML-declarative syntax to feed of data to your directive instances
+						By doing that, you can store the data in your controller, passing it to your D3 directive via data binding of parameters
+						</aside>
+					</section>
+					<!-- /What -->
+					<section>
+						<h3>How we use it in html</h3>
+						<pre><code data-trim>
+
+<graph bind-data="myData"></graph>
+
+<pie-chart data="someOtherData"></pie-chart>
+
+						</code></pre>
+						<aside class="notes">
+							We can declartively use our prepared components with any data anywhere. 
+							this is our interface for angular AAANNNND angular 2!!!
+							By making the accessors configurable, we avoid having a directive that assumes a particular input format. This means our directive can accept any type of data array so long as we tell it how to pluck the specific values out of the data using the accessor expression.
+							//Find gifs
+						</aside>
+					</section>
+					<section>
+						<pre><code data-trim >
+
+<graph 
+	bind-data="myData"
+	accessorFunction="accessDateFunction()"
+	showXAxis="true"
+	showYAxis="true"
+	tooltips="true"
+	interactive="true"
+	x="xFunction()"
+	y="yFunction()"
+	color="colorFunction()"
+	isArea="true"
+	margin="{left:50,top:50,bottom:50,right:50}"
+	showValues="true"
+	showLegend="true"
+	useInteractiveGuideLine="true"
+	>
+</graph>
+
+						</code></pre>
+						<aside class="notes">
+							Or it can look like this. By declaring 
+						</aside>
+					</section>
+					<section>
+						<pre><code data-trim>
+
+<graph
+	bind-data="data.graphData"
+	ng-repeat="graph in graphs"
+	ng-style="{color:color[$index]}"	
+	>
+</graph>
+						</code></pre>
+						<aside class="notes">
+							We can use other angular directives like ng-repeat to make a lot of the graphs. 
+						</aside>
+					</section>
+
+
+					<section>
+						<h3>how we define Angular 1</h3>
+						<pre><code data-trim>
+angular.module('App', [])
+.directive('graph', function() {
+
+	return {
+		restrict: 'E',
+		scope: {
+			data:   '=bindData', // bindings
+			width:  '@width',    // static value
+			height: '@height'    // static value
+		},
+		link: Graph
+	};
+	// postLink function
+	function Graph() { // d3 code };
+
+});
+						</code></pre>
+						<aside class="notes">
+							Directives have a link function which is essentially a “constructor”.
+							It contains the your d3 code that assumes some sort of data but doesn't know about your data. 
+
+						</aside>
+					</section>
+					
+					<!-- Getting Data -->
+					<section>
+						<h3>Getting Data</h3>
+						<pre><code data-trim>
+d3.json('data.json', function(err, data){
+	//render the graph with the data
+});
+d3.csv('data.csv', function(err, data){...})
+						</pre></code>
+						<aside class="notes">
+						D3 comes with a set of useful utilities for loading data from remote sources. The
+most common being the d3.json() or d3.csv()‘ functions. If used properly, we can continue to use
+these same functions but Angular also offers its own alternatives for loading in data.
+Our directive “know” nothing about where it got its data and only care about if or when it gets data and when that data changes.
+Using $http service instead of d3.json() allows us to avoid having to call $scope.$apply() directly.
+						</aside>
+					</section>
+					<!--/ Getting Data -->
+
+
+					<!--  -->
+				<section>
+				<h3></h3>
+					<pre><code data-trim>
+$scope.data = data;
+$scope.$digest();
+					</pre></code>
+					<aside class="notes">
+					To allow the above directive to not know about the data, we should only have it watch for changes to the data on the scope, and then we’ll load our data onto the scope from somewhere else. “someplace else” will be a controller. The controller is where the logic should go that ties together our application.
+						
+					</aside>
+				</section>
+				<!--/  -->
+
+
+					
+
+					<!--  -->
+					<section>
+						<h3>Enter and Exit</h3>
+						<pre><code data-trim>
+
+scope.$watch('data', function(data){
+	arcs = arcs.data(pie(data));
+	arcs.enter().append('path')
+		.style('stroke', 'white')
+		.attr('fill', function(d, i){ return color(i) });
+	arcs.exit().remove();
+	arcs.attr('d', arc);
+}, true);
+
+						</pre></code>
+						<aside class="notes">
+						$watch is responsible for adding or removing the necessary arc "path" tags and combination with d3’s .enter() .exit() selections.
+							
+						</aside>
+					</section>
+					<!--/  -->
+
+					<!--  -->
+				<section>
+					<h3>Using TypeScript</h3>
+					<ul>
+						<li><a href="https://github.com/borisyankov/DefinitelyTyped/blob/master/angularjs/angular.d.ts" target="_blank">Include DefinitelyTyped Type definitions for Angular JS 1.3+</a></li>
+					</ul>
+					<pre><code data-trim>
+module graphs {
+
+	export function graph(): ng.IDirective {
+		return {
+			link: ($scope: ng.IScope, element: JQuery, attributes: any) => {
+				...construction function goes here.
+			}
+		};
+	}
+}
+					</pre></code>
+					<aside class="notes">
+					Checkout definetly typed for Type definitions for Angular JS 1.3+
+					You can do as much or as little as you want.
+						
+					</aside>
+				</section>
+				<!--/  -->
+
+				<!--  -->
+				<!-- <section>
+				<h3></h3>
+					<pre><code data-trim>
+
+					</pre></code>
+					<aside class="notes">
+						
+					</aside>
+				</section> -->
+				<!--/  -->
+
+					<!-- Angular 2 -->
+					<section>
+						<h3>How we define Angular 2</h3>
+						<pre><code data-trim>
+import {Component, Template} from 'angular2/angular2';
+import {NgElement} from 'angular2/angular2';
+
+@Component({
+	selector: 'graph',
+	bind: {
+		'data':   'data',
+		'width':  'width',
+		'height': 'height'
+	}
+})
+@Template({
+	inline: '<svg></svg>'
+})
+class Graph {
+	constructor() { // code }
+}
+						</code></pre>
+						<aside class="notes">
+							it is very similar to Angular 1.
+							Import the modules to use
+							selector is the component name
+							bind = scope
+							template is the same
+							(highlght here too)
+
+						</aside>
+
+						
+					</section>
+					<!--  -->
+			<!-- 	<section>
+				<h3></h3>
+					<pre><code data-trim>
+
+					</pre></code>
+					<aside class="notes">
+						
+					</aside>
+				</section> -->
+				<!--/  -->
+				<!--  -->
+				<section>
+				<h3></h3>
+					<pre><code data-trim>
+
+					</pre></code>
+					<aside class="notes">
+						
+					</aside>
+				</section>
+				<!--/  -->
+					<section>
+						<pre><code data-trim>
+angular.module('App', [])
+.directive('graph', function() {
+	return {
+		restrict: 'E',
+		scope: {
+			data:   '=bindData', // bindings
+			width:  '@width',    // static value
+			height: '@height'    // static value
+		},
+		link: Graph
+	};
+	function Graph() { // code };
+});
+						</code></pre>
+						 <pre><code data-trim>
+import {Component, Template} from 'angular2/angular2';
+import {NgElement} from 'angular2/angular2';
+@Component({
+	selector: 'graph',
+	bind: {
+		'data':   'data',
+		'width':  'width',
+		'height': 'height'
+	}
+})
+@Template({
+	inline: '<svg></svg>'
+})
+class Graph {
+	constructor() { // code }
+}
+
+						</code></pre>
+						<aside class="notes">
+							highlight and write modules, metadata, funtionality
+							compare next to each other, style it to be next to each other if possible
+						</aside>
+					</section>
+
+					</section>
+				</section>
+				<!-- /Angular 1/ 2 -->
+				<section>
+					<h3>Let's write some Angular 1</h3>
+				</section>
+
+				<!-- Defining your component -->
+<!--         <section>
+					<h3>Graph class</h3>
+					<pre><code data-trim>
+export class Graph {
+	constructor(el: NgElement) {
+		// postLink function 
+
+	}
+}
+					</code></pre>
+					<aside class="notes">
+					// ng2
+						el.domElement
+					// ng1
+						el[0]
+
+					this is ur postLink, but now it's a class =D
+					el is our element that has been injected by it's Type in this case it's Type of NgElement.
+					</aside>
+
+				</section> -->
+				<!-- /Defining your component -->
+
+				<!-- Data detection -->
+				<section>
+					<section>
+				<h3></h3>
+					<pre><code data-trim>
+class Graph {
+	constructor(el: NgElement) {
+		// this.el.domElement;
+		this.el = el;
+	}
+}
+					</pre></code>
+					<aside class="notes">
+						
+					</aside>
+				</section>
+
+					<section>
+					<h3></h3>
+						<pre><code data-trim>
+@Template({
+	inline: '<svg></svg>'
+})
+class Graph {
+	constructor(el: NgElement) {
+		this.el = el;
+		this.svg = d3.select(this.el.domElement);
+	}
+}
+						</pre></code>
+						<aside class="notes">
+							briefly mention getters and setters, linking up the render function
+							(Look up onChange lifecycle)
+						</aside>
+					</section>
+					<section>
+						<pre><code data-trim>
+class Graph {
+	constructor(el: NgElement) {
+		this._data = null;  
+	}
+	get data() {
+		return this._data;
+	}
+	set data(value) {
+		this._data = value;
+
+		this.render(this._data);
+
+		return this._data;
+	}
+	render(data) {
+		// render d3 using this.svg
+	}  
+}
+</code></pre>
+					</section>
+				</section>
+				
+				<!--/Data detection  -->
+
+
+				<!-- Ang2 html -->
+				<section>
+					<h3>Add it to html</h3>
+					<pre><code data-trim>
+<graph [data]="stateData"></graph>
+					</code></pre>
+				</section>
+				<!-- Ang2 html -->
+
+				<!--  -->
+				<section>
+				<h3></h3>
+					<pre><code data-trim>
+import {Component, Template} from 'angular2/angular2';
+import {NgElement} from 'angular2/angular2';
+
+@Component({
+	selector: 'graph',
+	bind: {
+		'data': 'data',
+		'width': 'width',
+		'height': 'height'
+	}
+})
+@Template({
+	inline: '<svg></svg>'
+})
+export class Graph {
+	constructor(el: NgElement) {
+		this._data = null;
+	}
+
+	get data() {
+		return this._data;
+	}
+	set data(value) {
+		this._data = value;
+		return this._data;
+	}
+
+	render(data) {
+		this._renderD3(data);
+	}
+
+}
+					</pre></code>
+					<aside class="notes">
+					Recap highlight maybe
+					</aside>
+				</section>
+				<!--/  -->
+
+				<!--  -->
+				<section>
+				<h3>How to write the d3 render function.</h3>
+					<pre><code data-trim>
+
+					</pre></code>
+					<aside class="notes">
+						
+					</aside>
+				</section>
+				<!--/  -->
+
+				<!--  -->
+				<!-- <section>
+				<h3></h3>
+					<pre><code data-trim>
+
+					</pre></code>
+					<aside class="notes">
+						
+					</aside>
+				</section> -->
+				<!--/  -->
+
+				<!--  -->
+				<!-- <section>
+				<h3></h3>
+					<pre><code data-trim>
+
+					</pre></code>
+					<aside class="notes">
+						
+					</aside>
+				</section> -->
+				<!--/  -->
+
+				<!--  -->
+				<section>
+					<h3>Thank You!</h3>
+					<a href="https://twitter.com/AysegulYonet" target="_blank">@AysegulYonet</a>
+					<br>
+					<a href="https://twitter.com/gdi2290" target="_blank">@gdi2290</a> (aka PatrickJS)
+					<aside class="notes">
+						
+					</aside>
+				</section>
+				<!--/  -->
+
+				
+
+			
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<!-- CodeMirror Init -->
+		<script>
+						window.onload = function() {
+								window.editor = CodeMirror.fromTextArea(code, {
+										mode: "javascript",
+										lineNumbers: true,
+										lineWrapping: true,
+										extraKeys: {
+												//key binding for toggle full screen on/off
+												"F11": function(cm) {
+														cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+												},
+												//key binding for switch full screen off
+												"Esc": function(cm) {
+														if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+												}
+										}
+								});
+						};
+				</script>
+				<!-- /CodeMirror -->
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
