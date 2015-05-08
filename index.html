@@ -64,13 +64,12 @@
 					<section>
 
 						<h4>What is a <a href="http://d3js.org/" target="_blank">d3</a> Angular component?</h4>
-
+						<img src="images/d3examples.png">
 						<!-- TODO Angular d3 web component images in a list -->
 						<aside class="notes">
 						D3.js is a cool JavaScript library for manipulating documents based on data. It is a bunch of helper functions that makes working with DOM and DATA very pleasant. Why do we need Angular than? Because D3 is not a plug and play charts library. But by creating our own d3 components we can have our own encapsulate and reuse our visualizations.
 
-						You know how to customize D3.js graphs using examples found in search engines, but you struggle to reuse them and aren’t quite happy with the quality of the code itself.
-						<!-- Directives give us a way to encapsulate and reuse our visualizations by allowing us to essentially create our own HTML tags. -->
+		
 						
 						Also Angular makes it easy to include interactivity.
 						</aside>
@@ -81,7 +80,7 @@
 							<li class="fragment">D3 logic in a directive</li>
 							<li class="fragment">Use HTML-declarative syntax to feed of data to your directive instances</li>
 							<li class="fragment">Store the data in your controller</li>
-							<li class="fragment">Create Angular filters using D3 helper functions.</li>
+							<li class="fragment">Create Angular filters using D3 methods.</li>
 						</ul>
 						<aside class="notes">
 						Let's talk about the angular way of integrating d3.
@@ -130,7 +129,7 @@
 
 						</code></pre>
 						<aside class="notes">
-							Or it can look like this. By declaring 
+							Or it can look like this. You can bind an isolated scope property to a DOM attribute to customize your graph. 
 						</aside>
 					</section>
 					<section>
@@ -138,11 +137,11 @@
 
 <graph
 	bind-data="data.graphData"
-	ng-repeat="graph in graphs"
-	ng-style="{color:color[$index]}"	
+	ng-repeat="graph in graphs"	
 	>
 </graph>
 						</code></pre>
+						<img src="images/d3calendar.png">
 						<aside class="notes">
 							We can use other angular directives like ng-repeat to make a lot of the graphs. 
 						</aside>
@@ -174,7 +173,37 @@ angular.module('App', [])
 						<aside class="notes">
 							Directives have a link function which is essentially a “constructor”.
 							It contains your d3 code that assumes some sort of data but doesn't know about your data. 
+							Scope options: The & binding allows a directive to trigger evaluation of an expression in the context of the original scope, at a specific time.
 
+						</aside>
+					</section>
+
+					<section>
+						<h3>Enter and Exit</h3>
+						<pre><code data-trim>
+
+scope.$watch('data', function(data){
+	if (!data) return;
+	//divs selection with the data
+	divs = divs.data(data);
+	
+	//remove the extra elements
+	divs.exit().remove();
+	divs.enter().append('div')
+			.transition().ease("elastic")
+			.style("width", function (d) {
+			return d + "%";
+	})
+			.text(function (d) {
+			return d + "%";
+	});
+}, true);
+
+						</pre></code>
+						<aside class="notes">
+						Enter and exit is 
+						$watch is responsible for adding or removing the necessary arc "path" tags and combination with d3’s .enter() .exit() selections.
+							
 						</aside>
 					</section>
 					
@@ -201,40 +230,61 @@ Using $http service instead of d3.json() allows us to avoid having to call $scop
 				<section>
 				<h3></h3>
 					<pre><code data-trim>
-$scope.data = data;
-$scope.$digest();
+$http.get('/yourApiUrl').
+	success(function(response) {
+		
+		// when the response is available
+		$scope.data = response.data;
+	}).
+	error(function(response) {
+		
+	});
 					</pre></code>
 					<aside class="notes">
+
 					To allow the above directive to not know about the data, we should only have it watch for changes to the data on the scope, and then we’ll load our data onto the scope from somewhere else. “someplace else” will be a controller. The controller is where the logic should go that ties together our application.
 						
 					</aside>
 				</section>
 				<!--/  -->
+				<!--  -->
+				<section>
+				<h3>Truth about the data</h3>
+					<pre><code data-trim>
+<bar-graph graph-data="data" accessor="d.value"></bar-graph>
 
+divs.style("width", function (d) {
+	return scope.accessor({d:d}) + "%";
+})
+					</pre></code>
+					
+					<a href="http://jsfiddle.net/yonet3d/ckg9vdLq/4/">Accessor JSFiddle</a>
+					<aside class="notes">
+						Data is never in the format that you want it to be. 
+						 By making the accessors configurable, we avoid having a directive that assumes a particular input format. This means our directive can accept any type of data array so long as we tell it how to pluck the specific values out of the data using the accessor expression.
+					</aside>
+				</section>
+				<!--/  -->
 
 					
 
-					<!--  -->
-					<section>
-						<h3>Enter and Exit</h3>
+
+
+						<!--  -->
+			<!-- 		<section>
+						<h3>Filters</h3>
 						<pre><code data-trim>
 
-scope.$watch('data', function(data){
-	arcs = arcs.data(pie(data));
-	arcs.enter().append('path')
-		.style('stroke', 'white')
-		.attr('fill', function(d, i){ return color(i) });
-	arcs.exit().remove();
-	arcs.attr('d', arc);
-}, true);
+<a href="http://jsfiddle.net/yonet3d/42y48ewm/2/">JSFiddle</a>
 
 						</pre></code>
 						<aside class="notes">
-						$watch is responsible for adding or removing the necessary arc "path" tags and combination with d3’s .enter() .exit() selections.
+						
 							
 						</aside>
-					</section>
-					<!--/  -->
+					</section> -->
+		
+					
 
 					<!--  -->
 				<section>
@@ -261,6 +311,16 @@ module graphs {
 					</aside>
 				</section>
 				<!--/  -->
+								<!--  -->
+					<section>
+						<h3>Create some cool things</h3>
+						<a href="http://bl.ocks.org/hlvoorhees/5986172" target="_blank">3D Scatter Plot</a>
+						<a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">More d3 Examples</a>
+						<aside class="notes">
+						Don't get fooled by my simple examples. There are amazing d3 code out there. 
+							
+						</aside>
+					</section>
 
 				<!--  -->
 				<!-- <section>
