@@ -194,18 +194,18 @@ scope.$watch('data', function(data){
 	//remove the extra elements
 	divs.exit().remove();
 	divs.enter().append('div')
-			.transition().ease("elastic")
-			.style("width", function (d) {
-			return d + "%";
+		.transition().ease("elastic")
+		.style("width", function (d) {
+		return d + "%";
 	})
-			.text(function (d) {
+		.text(function (d) {
 			return d + "%";
-	});
+		});
 }, true);
 
 						</pre></code>
 						<aside class="notes">
-						Enter and exit is 
+						Enter and exit is one of the most confusing concepts in d3.
 						$watch is responsible for adding or removing the necessary div tags and combination with d3’s .enter() .exit() selections.
 							
 						</aside>
@@ -632,6 +632,7 @@ export class Graph {
 					<br>
 					<a href="https://twitter.com/gdi2290" target="_blank">@gdi2290</a> (aka PatrickJS)
 					<aside class="notes">
+					
 						
 					</aside>
 				</section>
